@@ -7,7 +7,7 @@ interface PropsPopUpForm {
 
 export const Header = styled.header`
   font-size: 38px;
-  color: #3a3a3a;
+  color: #dedede;
 
   h3 {
     line-height: 56px;
@@ -90,7 +90,7 @@ export const PopUpForm = styled.div<PropsPopUpForm>`
         left: 100px;
         border: none;
         background-color: #1AAE9F;
-        margin-top: 10px;
+        margin: 15px 10px 0 0;
         color: #fff;
         width: 80px;
         opacity: 0.8;
@@ -115,18 +115,18 @@ export const TodoGroups = styled.div`
   margin-top: 30px;
 
   #doneLink {
-    background: ${shade(-0.2, '#247a44')};
+    background: #1a552a;
   }
 
   #undoneLink {
-    background: #b3b3b3;
+    background: #4d4d4d;
   }
 
   a {
     font-size: 24px;
     font-weight: bold;
-    color: #3a3a3a;
-    border-radius: 5px;
+    color: #dedede;
+    border-radius: 30px 5px;
     width: 100%;
     height: 100px;
     padding: 24px;
@@ -140,12 +140,11 @@ export const TodoGroups = styled.div`
     }
 
     &:hover {
-      transform: translateX(5px);
-      background: ${shade(-0.1, 'slategray')};
+      transform: translateX(10px);
     }
 
     &:active {
-      background: ${shade(0.1, 'slategray')};
+      background: ${shade(0.1, '#1a552a')};
     }
 
     div {
@@ -155,7 +154,6 @@ export const TodoGroups = styled.div`
 
       p {
         font-size: 18px;
-        color: #3a3a3a;
       }
     }
   }
