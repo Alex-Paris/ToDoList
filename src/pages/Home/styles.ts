@@ -1,6 +1,9 @@
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
+interface PropsPopUpForm {
+  hasVisible:boolean;
+}
 
 export const Header = styled.header`
   font-size: 38px;
@@ -32,22 +35,91 @@ export const Header = styled.header`
       background: ${shade(0.3, '#1AAE9F')};
     }
   }
+`;
+
+export const PopUpForm = styled.div<PropsPopUpForm>`
+  position: relative;
+  width: 100%;
+  color: #3a3a3a;
+
+  h3 {
+    font-size: 22px;
+    margin: 10px 0 0 10px;
+  }
 
   hr {
-    border-top: 2px solid #333;
-    border-radius: 5px;
+    width: 98%;
+    position: fixed;
+    left: 1%;
   }
+
+  div {
+    display: none;
+    position: fixed;
+    width: 600px;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, 5%);
+    border-radius: 10px;
+    z-index: 9;
+    background-color: #fff;
+
+    ${(props) => props.hasVisible && css`
+      display: block;
+    `}
+
+    form {
+      max-width: 600px;
+      padding: 20px;
+
+      input {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 0 0;
+        border: none;
+        background: #eee;
+
+        &:focus {
+          background-color: ${shade(0.1, '#eee')};
+          outline: none;
+        }
+      }
+
+      button {
+        padding: 12px 20px;
+        left: 100px;
+        border: none;
+        background-color: #1AAE9F;
+        margin-top: 10px;
+        color: #fff;
+        width: 80px;
+        opacity: 0.8;
+        transition: transform 0.2s, background-color 0.2s;
+
+        &:hover {
+          transform: translateY(3px);
+          background: ${shade(0.1, '#1AAE9F')};
+        }
+
+        &:active {
+          background: ${shade(0.3, '#1AAE9F')};
+        }
+      }
+    }
+  }
+
+
 `;
 
 export const TodoGroups = styled.div`
   margin-top: 30px;
 
   #doneLink {
-    background: ${shade(0.1, '#1AAE9F')};
+    background: ${shade(-0.2, '#247a44')};
   }
 
   #undoneLink {
-    background: ${shade(-0.3, 'slategray')};
+    background: #b3b3b3;
   }
 
   a {
@@ -87,4 +159,10 @@ export const TodoGroups = styled.div`
       }
     }
   }
+`;
+
+export const Error = styled.span`
+  display: block;
+  color: #c53030;
+  margin-top: 8px;
 `;

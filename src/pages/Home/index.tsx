@@ -1,35 +1,67 @@
-import React, {useState} from 'react';
+import React, {FormEvent, useState} from 'react';
 import {FiCircle, FiCheckCircle} from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
-
-import { Header, TodoGroups } from './styles';
+import { Header, Error, TodoGroups, PopUpForm } from './styles';
 
 interface TodoGroup {
   name: string;
-  totalItems: number;
-  doneItems: number;
+  totalItems?: number;
+  doneItems?: number;
+
+
 }
 
 const Home: React.FC = () => {
-  const [todoDone, setTodoDone] = useState('');
+  const [newGroupTodo, setNewGroupTodo] = useState<TodoGroup>({name: ''});
+  const [showPopupForm, setShowPopupForm] = useState(false);
+  const [inputError, setInputError] = useState('');
   const [todoGroups, setTodoGroups] = useState<TodoGroup[]>(() => {
-    return ([
-      {name: 'places to go', totalItems: 0, doneItems: 0},
-      {name: 'places to go', totalItems: 2, doneItems: 1},
-      {name: 'places to go', totalItems: 2, doneItems: 2},
-      {name: 'places to go', totalItems: 3, doneItems: 0}
-    ]);
-
+    return [];
   });
+
+  function handleAddGroupTodo(event: FormEvent<HTMLFormElement>): void {
+    event.preventDefault();
+
+    if (!newGroupTodo.name) {
+      setInputError('Group Name needed.');
+      return;
+    }
+
+    try {
+      setTodoGroups([...todoGroups, newGroupTodo ]);
+      setInputError('');
+      setNewGroupTodo({name: ''});
+      setShowPopupForm(!showPopupForm);
+    } catch (err) {
+      setInputError('An error has happened.');
+    }
+  }
+
+  function handlePopupForm(): void {
+    setShowPopupForm(!showPopupForm);
+  }
 
   return (
     <>
       <Header>
         <h3>ToDo Group List</h3>
-        <button>Add Group List</button>
+        <button onClick={handlePopupForm} >Add Group List</button>
         <hr />
       </Header>
+
+      <PopUpForm hasVisible={showPopupForm}>
+        <div>
+          <h3>Group ToDo List</h3>
+          <hr/>
+          <form onSubmit={handleAddGroupTodo}>
+            <input type="text" value={newGroupTodo.name} onChange={(e) => setNewGroupTodo({name: e.target.value})} placeholder='Insert Group Name' />
+            { inputError && <Error>{inputError}</Error>}
+            <button type='submit' >Insert</button>
+          </form>
+        </div>
+      </PopUpForm>
+
       <TodoGroups>
         {todoGroups.map((todoGroup) => (
           <Link
