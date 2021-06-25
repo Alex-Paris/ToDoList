@@ -1,8 +1,8 @@
 import Todo from '../models/Todo';
 
-export function getStoredTodo(): Todo[] {
+export function getStoredTodo(todoGroupName:string): Todo[] {
   const storagedTodos = localStorage.getItem(
-    '@ToDoList:todo'
+    `@ToDoList:todo${todoGroupName}`
   );
 
   if (storagedTodos) {
@@ -12,15 +12,15 @@ export function getStoredTodo(): Todo[] {
   return [];
 }
 
-export function setStoredTodo(todos: Todo[]): void {
+export function setStoredTodo(todoGroupName:string, todos: Todo[]): void {
   localStorage.setItem(
-    '@ToDoList:todo',
+    `@ToDoList:todo${todoGroupName}`,
     JSON.stringify(todos)
   );
 }
 
-export function countStoredTodo(): [number, number] {
-  const storagedTodos = localStorage.getItem('@ToDoList:todo');
+export function countStoredTodo(todoGroupName:string): [number, number] {
+  const storagedTodos = localStorage.getItem(`@ToDoList:todo${todoGroupName}`);
 
   if (!storagedTodos) {
     return [0,0];

@@ -65,7 +65,6 @@ export const Form = styled.form<PropsForm>`
 `;
 
 
-
 export const Todos = styled.div`
   margin-top: 30px;
 
@@ -77,11 +76,12 @@ export const Todos = styled.div`
     background: #4d4d4d;
   }
 
-  a {
+  button {
     font-size: 24px;
     font-weight: bold;
     color: #dedede;
     border-radius: 30px 5px;
+    border: none;
     width: 100%;
     height: 100px;
     padding: 24px;
@@ -90,7 +90,7 @@ export const Todos = styled.div`
     text-decoration: none;
     transition: transform 0.2s, background-color 0.2s;
 
-    & + a {
+    & + button {
       margin-top: 14px;
     }
 

@@ -78,7 +78,7 @@ const Home: React.FC = () => {
         {todoGroups.map((todoGroup) => (
           <Link
             id={todoGroup.totalItems !== todoGroup.doneItems ? 'undoneLink' : 'doneLink'}
-            key={todoGroup.name} to="#"
+            key={todoGroup.name} to={`/todogroup/${todoGroup.name}`}
           >
             {todoGroup.name}
             <div>
