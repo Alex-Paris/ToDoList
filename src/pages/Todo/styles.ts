@@ -8,10 +8,27 @@ interface PropsForm {
 export const Header = styled.header`
   font-size: 38px;
   color: #dedede;
+  display: flex;
 
   h3 {
     line-height: 56px;
     margin-top: 20px;
+    flex: 10;
+  }
+
+  a {
+    font-size: 24px;
+    font-weight: bold;
+    color: #dedede;
+    padding: 24px;
+    margin-top: 10px;
+    padding-bottom: 0px;
+    flex: 1;
+    transition: transform 0.2s, background-color 0.2s;
+
+    &:hover {
+      transform: translateX(10px);
+    }
   }
 `;
 

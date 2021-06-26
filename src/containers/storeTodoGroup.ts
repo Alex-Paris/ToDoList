@@ -1,3 +1,4 @@
+import Todo from '../models/Todo';
 import TodoGroup from '../models/TodoGroup';
 
 export function getStoredTodoGroup(): TodoGroup[] {
@@ -5,11 +6,17 @@ export function getStoredTodoGroup(): TodoGroup[] {
     '@ToDoList:todogroup'
   );
 
-  if (storagedTodoGroups) {
-    return JSON.parse(storagedTodoGroups);
+  if (!storagedTodoGroups) {
+    return [];
   }
 
-  return [];
+  const parsedGroup = <TodoGroup[]> JSON.parse(storagedTodoGroups);
+
+  parsedGroup.forEach(todo => {
+    [todo.totalItems, todo.doneItems] = countStoredTodo(todo.name);
+  });
+
+  return parsedGroup;
 }
 
 export function setStoredTodoGroup(todoGroups: TodoGroup[]): void {
@@ -19,14 +26,20 @@ export function setStoredTodoGroup(todoGroups: TodoGroup[]): void {
   );
 }
 
-export function countStoredTodoGroup(): number {
-  const storagedTodoGroups = localStorage.getItem('@ToDoList:todogroup');
+export function countStoredTodo(todoGroupName:string): [number, number] {
+  const storagedTodos = localStorage.getItem(`@ToDoList:todo${todoGroupName}`);
 
-  if (!storagedTodoGroups) {
-    return 0;
+  if (!storagedTodos) {
+    return [0,0];
   }
 
-  const storagedTodoGroupsParsed = <TodoGroup[]> JSON.parse(storagedTodoGroups);
+  const storagedTodosParsed = <Todo[]> JSON.parse(storagedTodos);
 
-  return storagedTodoGroupsParsed.length+1;
+  const storageTotal = storagedTodosParsed.length;
+
+  const storageTodosDoneParsed = storagedTodosParsed.filter(p => p.done == true);
+
+  const storageDone = storageTodosDoneParsed.length;
+
+  return [storageTotal, storageDone];
 }

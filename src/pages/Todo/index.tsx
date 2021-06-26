@@ -1,5 +1,5 @@
 import React, {FormEvent, useState, useEffect} from 'react';
-import { FiCircle, FiCheckCircle } from 'react-icons/fi';
+import { FiCircle, FiCheckCircle, FiChevronsLeft } from 'react-icons/fi';
 import { useRouteMatch, Link } from 'react-router-dom';
 
 import { Header, Form, Error, Todos } from './styles';
@@ -62,7 +62,9 @@ const TodoList: React.FC = () => {
     <>
       <Header>
         <h3>ToDo Group List</h3>
-        <Link to={'/'}>Back</Link>
+        <Link to={'/'}>
+          <FiChevronsLeft size={40} />
+        </Link>
       </Header>
 
       <Form hasError={!!inputError} onSubmit={handleAddTodo}>

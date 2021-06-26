@@ -18,21 +18,3 @@ export function setStoredTodo(todoGroupName:string, todos: Todo[]): void {
     JSON.stringify(todos)
   );
 }
-
-export function countStoredTodo(todoGroupName:string): [number, number] {
-  const storagedTodos = localStorage.getItem(`@ToDoList:todo${todoGroupName}`);
-
-  if (!storagedTodos) {
-    return [0,0];
-  }
-
-  const storagedTodosParsed = <Todo[]> JSON.parse(storagedTodos);
-
-  const storageTotal = storagedTodosParsed.length+1;
-
-  storagedTodosParsed.filter(p => p.done == true);
-
-  const storageDone = storagedTodosParsed.length+1;
-
-  return [storageTotal, storageDone];
-}
