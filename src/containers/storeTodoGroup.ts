@@ -20,10 +20,25 @@ export function getStoredTodoGroup(): TodoGroup[] {
 }
 
 export function setStoredTodoGroup(todoGroups: TodoGroup[]): void {
+  if (todoGroups.length === 0) {
+    localStorage.removeItem(
+      '@ToDoList:todogroup'
+    );
+    return;
+  }
+
   localStorage.setItem(
     '@ToDoList:todogroup',
     JSON.stringify(todoGroups)
   );
+}
+
+export function deleteStoredTodoGroup(todoGroupName:string): void {
+  if (todoGroupName) {
+    localStorage.removeItem(
+      `@ToDoList:todo${todoGroupName}`,
+    );
+  }
 }
 
 export function countStoredTodo(todoGroupName:string): [number, number] {
