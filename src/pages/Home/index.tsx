@@ -1,9 +1,9 @@
-import React, {FormEvent, useState, useEffect} from 'react';
-import {FiCircle, FiCheckCircle} from 'react-icons/fi';
+import React, {FormEvent, useState, useEffect, MouseEvent} from 'react';
+import {FiCircle, FiCheckCircle, FiTrash2} from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 import { Header, Error, TodoGroups, PopUpForm } from './styles';
-import {getStoredTodoGroup, setStoredTodoGroup} from '../../containers/storeTodoGroup';
+import {getStoredTodoGroup, setStoredTodoGroup, deleteStoredTodoGroup} from '../../containers/storeTodoGroup';
 import TodoGroup from '../../models/TodoGroup';
 
 const Home: React.FC = () => {
@@ -42,6 +42,16 @@ const Home: React.FC = () => {
   useEffect(() => {
     setStoredTodoGroup(todoGroups);
   }, [todoGroups]);
+
+  function handleDeleteGroupTodo(event: MouseEvent, todoGroup: TodoGroup): void {
+    event.preventDefault();
+
+    const filteredTodoGroups = todoGroups.filter(p => p.name !== todoGroup.name);
+
+    setTodoGroups([...filteredTodoGroups ]);
+
+    deleteStoredTodoGroup(todoGroup.name);
+  }
 
   function handlePopupForm(): void {
     setShowPopupForm(!showPopupForm);
@@ -87,6 +97,9 @@ const Home: React.FC = () => {
                 : <p>{todoGroup.doneItems} item(s) done</p>
               }
             </div>
+            <button type='button' onClick={ e => handleDeleteGroupTodo(e, todoGroup)}>
+              <FiTrash2 size={30} color='#dc0000'/>
+            </button>
             { todoGroup.totalItems !== todoGroup.doneItems
               ? <FiCircle size={30} />
               : <FiCheckCircle size={30} />

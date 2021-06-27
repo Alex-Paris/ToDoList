@@ -1,5 +1,5 @@
-import React, {FormEvent, useState, useEffect} from 'react';
-import { FiCircle, FiCheckCircle, FiChevronsLeft } from 'react-icons/fi';
+import React, {FormEvent, useState, useEffect, MouseEvent} from 'react';
+import { FiCircle, FiCheckCircle, FiChevronsLeft, FiTrash2 } from 'react-icons/fi';
 import { useRouteMatch, Link } from 'react-router-dom';
 
 import { Header, Form, Error, Todos } from './styles';
@@ -46,7 +46,15 @@ const TodoList: React.FC = () => {
     }
   }
 
-  function handleSetDone(todo: Todo): void {
+  function handleDeleteTodo(event: MouseEvent, todo: Todo): void {
+    event.stopPropagation();
+
+    const filteredTodos = todos.filter(p => p.description !== todo.description);
+
+    setTodos([...filteredTodos ]);
+  }
+
+  function handleSetDone(event: MouseEvent, todo: Todo): void {
     const findTodo = todos.findIndex(p => p.description == todo.description);
 
     todos[findTodo].done = !todo.done;
@@ -83,18 +91,19 @@ const TodoList: React.FC = () => {
 
       <Todos>
         {todos.map((todo) => (
-          <button
+          <a
             id={!todo.done ? 'undoneLink' : 'doneLink'}
-            key={todo.description} type='button' onClick={() => handleSetDone(todo)}
+            key={todo.description} type='button' onClick={e => handleSetDone(e, todo)}
           >
             {todo.description}
-            <div>
-              { !todo.done
-                ? <FiCircle size={30} />
-                : <FiCheckCircle size={30} />
-              }
-            </div>
-          </button>
+            <button type='button' onClick={ e => handleDeleteTodo(e, todo)}>
+              <FiTrash2 size={30} color='#dc0000'/>
+            </button>
+            { !todo.done
+              ? <FiCircle size={30} />
+              : <FiCheckCircle size={30} />
+            }
+          </a>
         ))}
       </Todos>
     </>

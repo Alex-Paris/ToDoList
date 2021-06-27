@@ -63,7 +63,7 @@ export const Form = styled.form<PropsForm>`
     font-size: 24px;
     font-weight: bold;
     color: white;
-    background: #1AAE9F;
+    background: #1a552a;
     width: 110px;
     border: none;
     border-radius: 5px;
@@ -72,28 +72,43 @@ export const Form = styled.form<PropsForm>`
 
     &:hover {
       transform: translateY(3px);
-      background: ${shade(0.1, '#1AAE9F')};
+      background: ${shade(0.1, '#1a552a')};
     }
 
     &:active {
-      background: ${shade(0.3, '#1AAE9F')};
+      background: ${shade(0.3, '#1a552a')};
     }
   }
 `;
-
 
 export const Todos = styled.div`
   margin-top: 30px;
 
   #doneLink {
-    background: #1a552a;
+    background: #2b6e35;
+
+    &:hover {
+      background: ${shade(0.1, '#2b6e35')};
+    }
+
+    &:active {
+      background: ${shade(0.2, '#2b6e35')};
+    }
   }
 
   #undoneLink {
     background: #4d4d4d;
+
+    &:hover {
+      background: ${shade(0.1, '#4d4d4d')};
+    }
+
+    &:active {
+      background: ${shade(0.2, '#4d4d4d')};
+    }
   }
 
-  button {
+  a {
     font-size: 24px;
     font-weight: bold;
     color: #dedede;
@@ -102,12 +117,13 @@ export const Todos = styled.div`
     width: 100%;
     height: 100px;
     padding: 24px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     text-decoration: none;
     transition: transform 0.2s, background-color 0.2s;
 
-    & + button {
+    & + a {
       margin-top: 14px;
     }
 
@@ -115,17 +131,19 @@ export const Todos = styled.div`
       transform: translateX(10px);
     }
 
-    &:active {
-      background: ${shade(0.1, '#1a552a')};
-    }
-
-    div {
-      margin: 0 16px;
+    button {
       margin-left: auto;
-      margin-top: 4px;
+      width: auto;
+      height: auto;
+      background-color: transparent;
+      border-radius: 8px;
+      border: none;
+      padding: 1px;
+      margin-right: 5px;
 
-      p {
-        font-size: 18px;
+      :hover {
+        background-color: ${shade(0.2, '#4d4d4d')};
+        transform: translateX(0px);
       }
     }
   }

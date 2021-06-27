@@ -18,7 +18,7 @@ export const Header = styled.header`
     font-size: 24px;
     font-weight: bold;
     color: white;
-    background: #1AAE9F;
+    background: #1a552a;
     line-height: 48px;
     width: 100%;
     border: none;
@@ -28,11 +28,11 @@ export const Header = styled.header`
 
     &:hover {
       transform: translateY(3px);
-      background: ${shade(0.1, '#1AAE9F')};
+      background: ${shade(0.1, '#1a552a')};
     }
 
     &:active {
-      background: ${shade(0.3, '#1AAE9F')};
+      background: ${shade(0.3, '#1a552a')};
     }
   }
 `;
@@ -115,11 +115,19 @@ export const TodoGroups = styled.div`
   margin-top: 30px;
 
   #doneLink {
-    background: #1a552a;
+    background: #2b6e35;
+
+    &:hover {
+      background: ${shade(0.1, '#2b6e35')};
+    }
   }
 
   #undoneLink {
     background: #4d4d4d;
+
+    &:hover {
+      background: ${shade(0.1, '#4d4d4d')};
+    }
   }
 
   a {
@@ -143,10 +151,6 @@ export const TodoGroups = styled.div`
       transform: translateX(10px);
     }
 
-    &:active {
-      background: ${shade(0.1, '#1a552a')};
-    }
-
     div {
       margin: 0 16px;
       margin-left: auto;
@@ -154,6 +158,19 @@ export const TodoGroups = styled.div`
 
       p {
         font-size: 18px;
+      }
+    }
+
+    button {
+      background-color: transparent;
+      border-radius: 8px;
+      border: none;
+      padding: 1px;
+      margin-right: 5px;
+      margin-top: 4px;
+
+      :hover {
+        background-color: ${shade(0.2, '#4d4d4d')};
       }
     }
   }
